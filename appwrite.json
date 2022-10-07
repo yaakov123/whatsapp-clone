@@ -1,0 +1,180 @@
+{
+    "projectId": "633bf2f1031a36934a19",
+    "projectName": "whatsapp1",
+    "functions": [
+        {
+            "$id": "6330202fdc5b24c95c22",
+            "name": "addMembers",
+            "runtime": "node-16.0",
+            "path": "functions/addMembers",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "variables": {
+                "APPWRITE_FUNCTION_ENDPOINT": "http://192.168.150.166/v1",
+                "APPWRITE_FUNCTION_API_KEY": "f93ed799cfc98a3433fb912bf10f520e7e12309fc029ec5af4182a8f555658e346bafb4ddab7e251582d77d629ae4f35a23db7c0dae444f3e6896d7572a61cc10570347a744aac9e6157275606a8afbb960a52a1f15a883e5577cc70b428527f61a86b24be7ec6d9987727cd88ab9f2632783d3dabb6340c95b53ca52df7b65e"
+            }
+        },
+        {
+            "$id": "633c025182f340df8498",
+            "name": "calculateContacts",
+            "runtime": "node-16.0",
+            "path": "functions/calculateContacts",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "any"
+            ],
+            "events": [
+                "teams.*.memberships.*.create"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "variables": {
+                "APPWRITE_FUNCTION_ENDPOINT": "http://192.168.150.166/v1",
+                "APPWRITE_FUNCTION_API_KEY": "5cb9edd3d001dacc699c519d656cf39d99a626a0fd7eba2bf791a6743fd752358753d00122358ade052366ea703889864c8b81a70f8453f8cb2865050e86c0d4b770724d1a9a55dae6eccc2b8a520817b6207d9090b742b5efcf26bfeef25bac3f088af569221265140046cd2145dface35c3695ae76addaf835e3048ebfbf33"
+            }
+        }
+    ],
+    "collections": [
+        {
+            "$id": "contacts",
+            "$createdAt": "2022-10-04T09:09:47.008+00:00",
+            "$updatedAt": "2022-10-06T20:45:16.325+00:00",
+            "$permissions": [],
+            "databaseId": "whatsapp",
+            "name": "contacts",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "user_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "contact_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "user_contact",
+                    "type": "unique",
+                    "status": "available",
+                    "attributes": [
+                        "user_id",
+                        "contact_id"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "user_id",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "user_id"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "messages",
+            "$createdAt": "2022-10-06T20:48:01.894+00:00",
+            "$updatedAt": "2022-10-06T21:59:23.772+00:00",
+            "$permissions": [
+                "create(\"any\")"
+            ],
+            "databaseId": "whatsapp",
+            "name": "messages",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "contents",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 65000,
+                    "default": null
+                },
+                {
+                    "key": "group_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "user_id",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "group",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "group_id"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        }
+    ]
+}

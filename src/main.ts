@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/login", component: Login, name: "login" },
   { path: "/register", component: Register, name: "register" },
   { path: "/app", component: Application, name: "application" },
+  { path: "/", component: Application, name: "home" },
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });
